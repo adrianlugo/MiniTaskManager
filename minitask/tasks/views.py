@@ -54,3 +54,11 @@ class LoginView(TokenObtainPairView):
 @extend_schema(summary="Refrescar token de acceso", description="Permite obtener un nuevo `access` token usando el `refresh` token obtenido al loguearse.")
 class RefreshTokenView(TokenRefreshView):
     pass
+
+@extend_schema(summary="Obtener perfil del usuario", description="Devuelve los datos del usuario autenticado.")
+class UserProfileView(generics.RetrieveAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = UserSerializer
+
+    def get_object(self):
+        return self.request.user
