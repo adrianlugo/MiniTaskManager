@@ -1,5 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
+from django.contrib.auth.password_validation import validate_password
+from django.core import exceptions
 from .models import Task
 
 class TaskSerializer(serializers.ModelSerializer):
@@ -14,6 +16,14 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('username', 'password', 'email')
+
+    def validate_password(self, value):
+        try:
+            # Esto ejecuta los validadores definidos en settings.py
+            validate_password(value)
+        except exceptions.ValidationError as e:
+            raise serializers.ValidationError(list(e.messages))
+        return value
 
     def create(self, validated_data):
         user = User.objects.create_user(
