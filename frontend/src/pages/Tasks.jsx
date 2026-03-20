@@ -88,7 +88,7 @@ const Tasks = () => {
     try {
       await api.delete(`/api/tasks/${id}/`);
       setTasks(tasks.filter(t => t.id !== id));
-      
+
       // Actualizar contador histórico en localStorage
       const newDeleteCount = deletedCount + 1;
       setDeletedCount(newDeleteCount);
@@ -124,7 +124,7 @@ const Tasks = () => {
             <p style={{ color: 'var(--text-muted)' }}>Panel de control y objetivos personales.</p>
           </div>
         </div>
-        
+
         <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
           <div style={{ ...badgeStyle, background: 'rgba(99, 102, 241, 0.2)', color: '#a5b4fc', borderColor: 'rgba(99, 102, 241, 0.3)' }}>
             <Circle size={14} /> Pendientes: {pendingCount}
@@ -133,7 +133,7 @@ const Tasks = () => {
             <CheckCircle size={14} /> Completadas: {completedCount}
           </div>
           <div style={{ ...badgeStyle, background: 'rgba(239, 68, 68, 0.2)', color: '#fca5a5', borderColor: 'rgba(239, 68, 68, 0.3)' }}>
-            <Trash2 size={14} /> Histórico Borradas: {deletedCount}
+            <Trash2 size={14} /> Borradas: {deletedCount}
           </div>
         </div>
       </div>
@@ -162,10 +162,10 @@ const Tasks = () => {
               )}
             </button>
             {editingTaskId && (
-              <button 
-                className="btn-icon" 
-                type="button" 
-                onClick={cancelEdit} 
+              <button
+                className="btn-icon"
+                type="button"
+                onClick={cancelEdit}
                 title="Cancelar edición"
                 style={{ background: 'rgba(255,255,255,0.1)' }}
               >
@@ -189,7 +189,7 @@ const Tasks = () => {
         </div>
       ) : tasks.length > 0 ? (
         <div className="task-grid">
-          {tasks.map((task) => (
+          {tasks.filter(t => t.id !== editingTaskId).map((task) => (
             <div key={task.id} className="task-item animate-fade-up">
               <div className="task-content" style={{ display: 'flex', gap: '1rem', alignItems: 'center', width: '100%' }}>
                 <div
