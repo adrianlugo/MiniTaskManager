@@ -8,8 +8,8 @@
 
 Esta es una arquitectura desacoplada donde el frontend y el backend residen en carpetas independientes para facilitar el despliegue y desarrollo:
 
--   **`minitask/` (Backend):** API REST desarrollada con Django y Django REST Framework. Incluye autenticación JWT, CORS configurado y documentación interactiva.
--   **`frontend/` (Frontend):** (Próximamente) Aplicación cliente construida en React para consumir la API. Estará ubicada en esta carpeta paralela al backend.
+-   **`minitask/` (Backend):** API REST robusta desarrollada con Django y Django REST Framework. Incluye autenticación JWT, documentación Swagger interactiva y gestión de tareas personalizada.
+-   **`frontend/` (Frontend):** Aplicación moderna construida con **React + Vite** y **Lucide Icons**. Ofrece una experiencia fluida con edición rápida, confirmaciones de seguridad y un panel de estadísticas persistente.
 
 ---
 
