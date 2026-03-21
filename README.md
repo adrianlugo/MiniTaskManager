@@ -9,7 +9,9 @@
 Esta es una arquitectura desacoplada donde el frontend y el backend residen en carpetas independientes para facilitar el despliegue y desarrollo:
 
 -   **`minitask/` (Backend):** API REST robusta desarrollada con Django y Django REST Framework. Incluye autenticación JWT, documentación Swagger interactiva y gestión de tareas personalizada.
--   **`frontend/` (Frontend):** Aplicación moderna construida con **React + Vite** y **Lucide Icons**. Ofrece una experiencia fluida con edición rápida, confirmaciones de seguridad y un panel de estadísticas persistente.
+-   **`frontend/` (Frontend):** Aplicación moderna de alto rendimiento construida con **React + Vite**.
+    - **Edición Enfocada:** La tarea "sube" al formulario y se oculta de la lista para maximizar el foco durante la actualización.
+    - **Seguridad en Borrado:** Confirmación obligatoria mediante un **Modal Premium personalizado** con efectos de brillo y desenfoque (reemplaza los diálogos genéricos del navegador).
 
 ---
 

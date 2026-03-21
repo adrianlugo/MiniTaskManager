@@ -13,8 +13,8 @@ Una interfaz moderna, rápida y estética para la gestión de tareas. Construida
    - **Histórico de Borradas:** Registro persistente (vía `localStorage`) de cuántas tareas has eliminado en total.
 ✅ **CRUD Completo:** 
    - Añadir tareas con descripción.
-   - **Edición Rápida:** Sube una tarea al formulario con un clic para actualizarla sin perder el contexto.
-   - **Seguridad en Borrado:** Confirmación obligatoria antes de eliminar para prevenir errores accidentales.
+    - **Edición Enfocada:** El elemento seleccionado desaparece de la lista y aparece arriba en el formulario, centrando el foco del usuario.
+    - **Seguridad en Borrado:** Modal personalizado con **Glassmorphism**, reemplazando los avisos nativos del navegador por una experiencia integrada.
 ✅ **Autenticación:** Integración completa con JWT para sesiones seguras.
 ✅ **Búsqueda en Tiempo Real:** Filtra tus tareas conforme escribes.
 
