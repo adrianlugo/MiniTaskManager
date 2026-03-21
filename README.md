@@ -1,6 +1,18 @@
 # 🚀 MiniTask Manager
 
-**MiniTask Manager** es un ecosistema completo para la gestión de tareas, diseñado para ser ligero, intuitivo y potente. Este repositorio contiene tanto el **Backend (API)** como el futuro **Frontend**.
+**MiniTask Manager** es un ecosistema completo para la gestión de tareas, diseñado para ser ligero, intuitivo y potente. Este repositorio contiene tanto el **Backend (API)** como su aplicación cliente construida en **React**.
+
+---
+
+## 🖼️ Vista del Proyecto
+
+| Vista General | Confirmación UI (Modal Premium) |
+| :---: | :---: |
+| ![Vista General](assets/screenshots/vista-general.png) | ![Confirmación UI](assets/screenshots/confirmacion-de-eliminar.png) |
+
+| Edición de Tareas | Interfaz Limpia |
+| :---: | :---: |
+| ![Edición de Tareas](assets/screenshots/edicion-tarea.png) | ![Vista Vacía](assets/screenshots/vista-vacia.png) |
 
 ---
 
