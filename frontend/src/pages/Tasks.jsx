@@ -14,6 +14,7 @@ const Tasks = () => {
     const saved = localStorage.getItem('minitask_deleted_total');
     return saved ? parseInt(saved, 10) : 0;
   });
+  const [taskToDelete, setTaskToDelete] = useState(null);
 
   useEffect(() => {
     fetchTasks();
@@ -80,22 +81,25 @@ const Tasks = () => {
     }
   };
 
-  const handleDelete = async (id) => {
-    // Confirmación antes de eliminar
-    const confirmed = window.confirm('¿Estás seguro de que quieres eliminar esta tarea? Esta acción no se puede deshacer.');
-    if (!confirmed) return;
+  const handleDeleteRequest = (task) => {
+    setTaskToDelete(task);
+  };
+
+  const confirmDelete = async () => {
+    if (!taskToDelete) return;
 
     try {
-      await api.delete(`/api/tasks/${id}/`);
-      setTasks(tasks.filter(t => t.id !== id));
-
-      // Actualizar contador histórico en localStorage
+      await api.delete(`/api/tasks/${taskToDelete.id}/`);
+      setTasks(tasks.filter(t => t.id !== taskToDelete.id));
+      
       const newDeleteCount = deletedCount + 1;
       setDeletedCount(newDeleteCount);
       localStorage.setItem('minitask_deleted_total', newDeleteCount);
+      setTaskToDelete(null);
     } catch (err) {
       console.error('Error deleting task', err);
       setError('No se pudo borrar la tarea.');
+      setTaskToDelete(null);
     }
   };
 
@@ -213,7 +217,7 @@ const Tasks = () => {
                 </button>
                 <button
                   className="btn-icon"
-                  onClick={() => handleDelete(task.id)}
+                  onClick={() => handleDeleteRequest(task)}
                   title="Eliminar"
                   style={{ color: 'var(--danger)', opacity: 0.6 }}
                 >
@@ -227,6 +231,48 @@ const Tasks = () => {
         <div className="glass-card" style={{ textAlign: 'center', padding: '4rem', opacity: 0.7 }}>
           <PlusCircle size={48} style={{ margin: '0 auto 1rem', display: 'block' }} />
           <p>No tienes tareas aún. ¡Empieza creando una!</p>
+        </div>
+      )}
+      {/* Modal de Confirmación Premium */}
+      {taskToDelete && (
+        <div style={{
+          position: 'fixed', top: 0, left: 0, width: '100%', height: '100%',
+          background: 'rgba(15, 23, 42, 0.8)', backdropFilter: 'blur(12px)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          zIndex: 1000, padding: '1rem', animation: 'fadeIn 0.2s ease-out'
+        }}>
+          <div className="glass-card animate-fade-up" style={{
+            maxWidth: '400px', width: '100%', textAlign: 'center',
+            border: '1px solid rgba(239, 68, 68, 0.2)', boxShadow: '0 20px 50px rgba(0,0,0,0.5)'
+          }}>
+            <div style={{ 
+              background: 'rgba(239, 68, 68, 0.1)', width: '64px', height: '64px',
+              borderRadius: '50%', display: 'flex', alignItems: 'center',
+              justifyContent: 'center', margin: '0 auto 1.5rem', color: 'var(--danger)'
+            }}>
+              <Trash2 size={32} />
+            </div>
+            <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>¿Seguro de esta acción?</h3>
+            <p style={{ color: 'var(--text-muted)', marginBottom: '2rem' }}>
+              Estás a punto de eliminar permanentemente la tarea: <br/>
+              <strong style={{ color: 'var(--text)' }}>"{taskToDelete.title}"</strong>
+            </p>
+            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
+              <button 
+                className="btn-icon" 
+                onClick={() => setTaskToDelete(null)}
+                style={{ background: 'rgba(255,255,255,0.05)', padding: '0.75rem 1.5rem', borderRadius: '0.75rem' }}
+              >
+                Cancelar
+              </button>
+              <button 
+                onClick={confirmDelete}
+                style={{ background: 'var(--danger)', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '0.75rem', fontWeight: 700 }}
+              >
+                Sí, eliminar
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>
